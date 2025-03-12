@@ -1,70 +1,102 @@
 let writeCountry = document.querySelector(".writeCountry");
 
-let countryName = document.querySelector(".countryName");
-
-let placeName = document.querySelector(".placeName");
-
-let localTime = document.querySelector(".localTime");
-
-let tempF = document.querySelector(".tempF");
-
-let condition = document.querySelector(".condition");
-
-
-
-
-
-async function writeYourCountry() {
-    let response = await fetch("http://api.weatherapi.com/v1/current.json?key=a231c70e062643399fc13718250402&q=uruguay&aqi=no");
-    let data = await response.json();
-
-    return data
-}
-writeYourCountry();
-
-
-async function filtred() {
-    let infoData = await writeYourCountry();
-    let countryName = infoData["location"]["country"];
-    let placeName = infoData["location"]["name"];
-
-    let localTime = infoData["location"]["localtime"];
-
-    let tempF = infoData["current"]["temp_f"];
-    let condition = infoData["current"]["condition"]["text"];
-    let icon = infoData["current"]["condition"]["icon"]
-
-    let total = {
-        name: countryName,
-        place: placeName,
-        time: localTime,
-        temp: tempF,
-        condition: condition,
-        image: icon,
-    }
-
-    return total
-}
-
-
-
+let informationContainer = document.querySelector(".information");
 
 writeCountry.addEventListener("input", async () => {
-
-    let final = await filtred()
-    if (final && writeCountry.value.toLowerCase() == final.name) {
-        countryName.innerHTML = final.name;
-        placeName.innerHTML = final.place;
-        localTime.innerHTML = final.time;
-        tempF.innerHTML = final.temp + "c°";
-        condition.innerHTML = final.condition;
-    }
+    filtred(writeCountry.value)
 })
 
 
+async function allCountries() {
+    let apiKey = "a231c70e062643399fc13718250402";
+    let response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=uruguay&aqi=no`);
+    let data = await response.json();
+
+    return data;
+}
+
+async function filtred(inputValue) {
+    informationContainer.innerHTML = "";
+    let infoData = await allCountries();
+
+    let filtredCountries = infoData.filter(element => {
+        return element.name.toLowerCase().includes(inputValue.toLowerCase())
+    })
+
+    let total = {
+        name: filtredCountries["location"]["country"],
+        place: filtredCountries["location"]["name"],
+        time: filtredCountries["location"]["localtime"],
+        temp: filtredCountries["current"]["temp_c"],
+        condition: filtredCountries["current"]["condition"]["text"],
+        image: filtredCountries["current"]["condition"]["icon"],
+    }
+
+    let nameCountry = document.createElement("p");
+    nameCountry.classList.add("nameCountry");
+    nameCountry.innerHTML = total["name"];
+
+    let placeName = document.createElement("p");
+    placeName.classList.add("placeName");
+    placeName.innerHTML = total["place"];
+
+    let time = document.createElement("p");
+    time.classList.add("time");
+    time.innerHTML = total["time"];
+
+    let tempC = document.createElement("p");
+    tempC.classList.add("tempC");
+    tempC.innerHTML = total["temp"];
+
+    let condition = document.createElement("p");
+    condition.classList.add("condition");
+    condition.innerHTML = total["condition"];
+
+    let icon = document.createElement("img");
+    icon.scr = total["image"];
+    icon.classList.add("icon");
+
+    informationContainer.appendChild(nameCountry);
+    informationContainer.appendChild(placeName);
+    informationContainer.appendChild(time);
+    informationContainer.appendChild(tempC);
+    informationContainer.appendChild(condition);
+    informationContainer.appendChild(icon);
+
+
+    console.log(icon)
+    return icon
+}
+filtred();
+
+function showAllCountries() {
+
+}
 
 
 
+
+
+
+
+
+/*
+
+escribo en el input
+se despliega una lista de paises
+escojo el mio 
+aparece la info en pantalla 
+se cambia el fondo de color y el mensaje de la page 
+si vuelvo a escribir, se borra todo de nuevo
+
+
+
+
+reunir toda la informacion 
+filtrar la informacion 
+imprimir la informacion filtrada
+
+*/
 
 
 

@@ -1,0 +1,10 @@
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin debug {
+    background-color: rgba(25, 190, 25, 0.26);
+    border: 1px solid lime;
+}

@@ -6,36 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather</title>
     <link rel="stylesheet" href="assets/styles/styles.css">
-    <script src="assets/js/index.js" defer></script>
-
+    <script src="./two.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <h1 class="title">My Weather Page</h1>
-    <input type="text" class="writeCountry">
-    <div class="messageContainer">
-        <p class="message">Have a Happy <span class="plus">Sunny</span> Day:)</p>
+    <nav>
+        <div class="navContainer">
+            <input class="writeCountry" placeholder="Write your country.." type="text">
+            <button class="button">
+                <img src="" alt="" />
+            </button>
+
+            <p></p>
+        </div>
+
+    </nav>
+    <div class="iconContainer">
+        <div class="image">
+            <span class="icon"></span>
+        </div>
+        <div class="messageContainer">
+            <p class="condition">Have a happy day:)</p>
+        </div>
+        <div class="information">
+            <p class="nameCountry">Country</p>
+            <p class="placeName">City</p>
+            <p class="tempC">Grados</p>
+            <p class="time">Fecha</p>
+        </div>
+
     </div>
 
-    <h3 class="temperatura"></h3>
-    <div class="information">
-        <p class="countryName"></p>
-        <p class="placeName"></p>
-        <p class="localTime"></p>
-        <p class="tempF"></p>
-        <p class="condition"></p>
-        <img src="/" alt="/" class="icon">
-    </div>
 
-    <div class="cloud">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-
-    <div class="cloud"></div>
+    <footer></footer>
 </body>
 
 </html>

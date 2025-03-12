@@ -1,104 +1,105 @@
-body {
-    width: 100%;
-    height: 100%;
-    padding: 0;
+@use "var" as *;
+@use "mixins" as *;
+
+// rgb(83, 141, 83);
+
+
+*,
+*::after,
+*::before:not(i) {
     margin: 0;
-    background-color: rgb(83, 141, 83);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+}
 
+html,
+body,
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+}
 
+body {
+    background-color: $tirth-color;
 
-    .title {
-        margin-top: 30px;
+}
+
+nav {
+    padding: 10px;
+    width: 100%;
+    background-color: $primary-color;
+
+    .navContainer {
+        width: 100%;
+        @include flex-center;
+
     }
 
     input {
-        width: 50%;
-        border-radius: 10px;
-        height: 30px;
+        width: 60%;
+        border-radius: 30px 0 0 30px;
         border: none;
-
-    }
-}
-
-.messageContainer {
-    display: flex;
-    gap: 0;
-
-
-    .message {
-        width: 100%;
-        height: 80px;
-        font-size: 1rem;
-        font-weight: 800;
+        padding: 8px 20px;
+        height: 100%;
+        font-size: 1.1rem;
+        outline: none;
+        font-family: "Playfair Display", serif;
+        font-weight: 900;
     }
 
-    .plus {
-
-        width: 100%;
-        height: 80px;
-        font-size: 1.5rem;
-    }
-}
-
-
-// .cloud {
-//     height: 100px;
-//     width: 100px;
-//     border-radius: 30px;
-//     display: flex;
-//     flex-wrap: wrap;
-//     position: relative;
-
-//     div {
-//         width: 50px;
-//         aspect-ratio: 1;
-//         background-color: white;
-//         border-radius: 30px;
-
-//         &:last-child {
-//             width: 60px;
-//             position: absolute;
-//             top: 50%;
-//             left: 50%;
-//             transform: translate(-50%, -50%);
-//             background-color: white;
-//         }
-//     }
-
-// }
-
-.cloud {
-    width: 120px;
-    height: 60px;
-    background-color: white;
-    border-radius: 50px;
-    position: relative;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
-
-    &::before,
-    &::after {
-        content: "";
-        position: absolute;
+    button {
         background-color: white;
-        border-radius: 50%;
+        width: 50px;
+        height: 100%;
+        border-radius: 0 30px 30px 0;
+        border: 0;
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $secondary-color;
+        }
+    }
+}
+
+.iconContainer {
+    width: 100%;
+    height: 100vh;
+    @include flex-center;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    .messageContainer {
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+
+
     }
 
-    &::before {
-        width: 70px;
-        height: 70px;
-        top: -30px;
-        left: 15px;
+    .image {
+        width: 100%;
+        @include flex-center;
+
+
+        img {
+            width: 15%;
+            aspect-ratio: 1;
+        }
     }
 
-    &::after {
-        width: 80px;
-        height: 80px;
-        top: -40px;
-        right: 10px;
+    .information {
+
+        width: 100%;
+        height: 20vh;
+        @include flex-center;
+        gap: 30px;
+        font-size: 1.5rem;
+        font-family: "Playfair Display", serif;
+        font-weight: 500;
     }
 }
