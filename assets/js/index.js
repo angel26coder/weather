@@ -1,102 +1,119 @@
 let writeCountry = document.querySelector(".writeCountry");
-
 let informationContainer = document.querySelector(".information");
+let submitButton = document.querySelector(".button");
+let messageContainer = document.querySelector(".messageContainer");
+let iconContainer = document.querySelector(".image");
+
+
+submitButton.addEventListener("click", async () => {
+    showYourCountry(writeCountry.value)
+})
 
 writeCountry.addEventListener("input", async () => {
-    filtred(writeCountry.value)
 })
 
 
-async function allCountries() {
-    let apiKey = "a231c70e062643399fc13718250402";
-    let response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=uruguay&aqi=no`);
+async function allCountries(inputValue) {
+
+
+    let apiKey = "a231c70e062643399fc13718250402"
+    let response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${inputValue}&aqi=no`);
+
+    if (!response.ok) {
+
+        console.log(`Error ${response.status}: ${response.statusText}`);
+        return
+    }
     let data = await response.json();
 
-    return data;
-}
-
-async function filtred(inputValue) {
-    informationContainer.innerHTML = "";
-    let infoData = await allCountries();
-
-    let filtredCountries = infoData.filter(element => {
-        return element.name.toLowerCase().includes(inputValue.toLowerCase())
-    })
-
     let total = {
-        name: filtredCountries["location"]["country"],
-        place: filtredCountries["location"]["name"],
-        time: filtredCountries["location"]["localtime"],
-        temp: filtredCountries["current"]["temp_c"],
-        condition: filtredCountries["current"]["condition"]["text"],
-        image: filtredCountries["current"]["condition"]["icon"],
+        name: data["location"]["country"],
+        place: data["location"]["name"],
+        time: data["location"]["localtime"],
+        temp: data["current"]["temp_c"],
+        condition: data["current"]["condition"]["text"],
+        image: data["current"]["condition"]["icon"],
     }
 
+    return total
+}
+
+async function showYourCountry(inputValue) {
+    messageContainer.innerHTML = "";
+    informationContainer.innerHTML = "";
+    iconContainer.innerHTML = "";
+
+    let countries = await allCountries(inputValue);
+
+    if (countries == null) {
+        alert("SOMETHING IN THE NAME COUNTRY IS WRONG")
+        return
+    }
     let nameCountry = document.createElement("p");
     nameCountry.classList.add("nameCountry");
-    nameCountry.innerHTML = total["name"];
+    nameCountry.innerHTML = countries["name"];
 
     let placeName = document.createElement("p");
     placeName.classList.add("placeName");
-    placeName.innerHTML = total["place"];
+    placeName.innerHTML = countries["place"];
 
     let time = document.createElement("p");
     time.classList.add("time");
-    time.innerHTML = total["time"];
+    time.innerHTML = countries["time"];
 
     let tempC = document.createElement("p");
     tempC.classList.add("tempC");
-    tempC.innerHTML = total["temp"];
+    tempC.innerHTML = `${countries["temp"]}°`;
 
-    let condition = document.createElement("p");
+    let condition = document.createElement("span");
     condition.classList.add("condition");
-    condition.innerHTML = total["condition"];
+    condition.innerHTML = `Have a happy ${countries["condition"]} day:)`;
 
     let icon = document.createElement("img");
-    icon.scr = total["image"];
+    icon.src = `https://${countries["image"]}`;
     icon.classList.add("icon");
 
     informationContainer.appendChild(nameCountry);
     informationContainer.appendChild(placeName);
     informationContainer.appendChild(time);
     informationContainer.appendChild(tempC);
-    informationContainer.appendChild(condition);
-    informationContainer.appendChild(icon);
-
-
-    console.log(icon)
-    return icon
+    messageContainer.appendChild(condition);
+    iconContainer.appendChild(icon);
 }
-filtred();
-
-function showAllCountries() {
-
-}
-
-
-
-
-
-
-
 
 /*
 
 escribo en el input
 se despliega una lista de paises
-escojo el mio 
-aparece la info en pantalla 
-se cambia el fondo de color y el mensaje de la page 
+escojo el mio
+aparece la info en pantalla
+se cambia el fondo de color y el mensaje de la page
 si vuelvo a escribir, se borra todo de nuevo
 
 
 
 
-reunir toda la informacion 
-filtrar la informacion 
+reunir toda la informacion
+filtrar la informacion
 imprimir la informacion filtrada
 
 */
+
+
+
+
+// async function changeTheIcon(inputValue) {
+//     let apiKey = "a231c70e062643399fc13718250402"
+//     let apiInfo = await fetch(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${inputValue}&aqi=no`);
+
+//     let data = apiInfo.json();
+//     let status = data.condition;
+
+//     if (status === "cloudy") {
+//         iconContainer.src = "assets/image/cloudy"
+//     }
+// }
+
 
 
 
