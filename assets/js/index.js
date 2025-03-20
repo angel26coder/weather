@@ -92,38 +92,6 @@ function updatePlaceholder() {
 
 window.addEventListener('resize', updatePlaceholder);
 window.addEventListener('load', updatePlaceholder);
-/*
-
-escribo en el input
-se despliega una lista de paises
-escojo el mio
-aparece la info en pantalla
-se cambia el fondo de color y el mensaje de la page
-si vuelvo a escribir, se borra todo de nuevo
-
-
-
-
-reunir toda la informacion
-filtrar la informacion
-imprimir la informacion filtrada
-
-*/
-
-
-
-
-// async function changeTheIcon(inputValue) {
-//     let apiKey = "a231c70e062643399fc13718250402"
-//     let apiInfo = await fetch(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${inputValue}&aqi=no`);
-
-//     let data = apiInfo.json();
-//     let status = data.condition;
-
-//     if (status === "cloudy") {
-//         iconContainer.src = "assets/image/cloudy"
-//     }
-// }
 
 
 
