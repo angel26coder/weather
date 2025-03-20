@@ -81,6 +81,17 @@ async function showYourCountry(inputValue) {
     iconContainer.appendChild(icon);
 }
 
+function updatePlaceholder() {
+
+    if (window.matchMedia("(max-width: 700px)").matches) {
+        writeCountry.placeholder = "Write here";
+    } else {
+        writeCountry.placeholder = "Write your country";
+    }
+}
+
+window.addEventListener('resize', updatePlaceholder);
+window.addEventListener('load', updatePlaceholder);
 /*
 
 escribo en el input
